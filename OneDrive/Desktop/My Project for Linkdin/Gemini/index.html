@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"
+        integrity="sha512-UuQ/zJlbMVAw/UU8vVBhnI4op+/tFOpQZVT+FormmIEhRSCnJWyHiBbEVgM4Uztsht41f3FzVWgLuwzUqOObKw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css"
+        integrity="sha512-Hp+WwK4QdKZk9/W0ViDvLunYjFrGJmNDt6sCflZNkjgvNq9mY+0tMbd6tWMiAlcf1OQyqL4gn2rYp7UsfssZPA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <section class="hero">
+        <div class="nav">
+            <div class="nav1">
+                <i class="fa-solid fa-bars"></i>
+
+                <i class="fa-solid fa-circle-plus"></i>
+
+            </div>
+            <div class="nav2">
+                <div><i class="fa-solid fa-circle-info"></i>
+                    <p>Quarry</p>
+                </div>
+                <div><i class="fa-solid fa-clock-rotate-left"></i>
+                    <p>Activity</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-gear"></i>
+                    <p>Settings</p>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <nav>
+                <h1>Gemini</h1>
+                <div class="imgCont">
+                    <i class="fa-solid fa-bars"></i>
+                    <img src="./img/linkdin .jpg" class="img">
+                </div>
+
+            </nav>
+            <div class="textArea">
+                <h1 data-shadow='dang!'>Hello, Meer Sahab</h1>
+                <h1 class="h2">How can I help you today ?</h1>
+                <div class="grid">
+                    <div class="grids" id="g1">
+                        <p>Give me a walkthrough of The Byzantine Empire in seven bullet points or less. </p>
+                        <img src="" alt="">
+                    </div>
+                    <div class="grids" id="g2">
+                        <p>What is noteworthy about this image? Give me ideas for how I can use its elements creatively
+                        </p>
+                        <img src="" alt="">
+                    </div>
+                    <div class="grids" id="g3">
+                        <p>You're a local guide giving me travel tips for Tokyo. Draft a 3-day travel itinerary showing
+                            me the most popular places in the city. </p>
+                        <img src="" alt="">
+                    </div>
+                    <div class="grids" id="g4">
+                        <p>Help me write an email to Solar Toothbrush Co. requesting a refund for a product that came
+                            damaged. </p>
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="searching">
+                <input type="text" class="input" placeholder="Enter Your Promt Here.">
+                <div class="sbmtBtn"><i class="fa-solid fa-arrow-up-long"></i></div>
+                <p>Gemini may display inaccurate info, including about people, so double-check its responses. Your
+                    privacy and Gemini Apps</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <script type="importmap">
+        {
+            "imports": {
+                "@google/generative-ai":
+                "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
+
+    <script type="module">
+
+
+
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+
+        // Access your API key as an environment variable (see "Set up your API key" above)
+        const apiKey = 'AIzaSyA_5bM6KMH0mXtBX61bmQw7sR9pkABnANA';
+        const genAI = new GoogleGenerativeAI(apiKey);
+        // const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
+        // Getting Inpput BTN :
+        let inputVal = document.querySelector(".input");
+        let sbmtBtn = document.querySelector(".sbmtBtn");
+        let grid = document.querySelector(".grid");
+        let textArea = document.querySelector(".textArea");
+
+        let g1 = document.querySelector("#g1");
+        let g2 = document.querySelector("#g2");
+        let g3 = document.querySelector("#g3");
+        let g4 = document.querySelector("#g4");
+
+
+        async function run() {
+            textArea.innerHTML = "";
+            textArea.innerText = inputVal.value;
+            // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+            const prompt = inputVal.value;
+
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            const text = response.text();
+
+            grid.style.display = "none";
+            textArea.innerText = text;
+            inputVal.value = "";
+
+            console.log(text);
+        }
+
+
+        sbmtBtn.addEventListener("click", run);
+
+        g1.addEventListener("click", () => {
+            inputVal.value = g1.innerText;
+            console.log(g1.innerText);
+        });
+
+        g2.addEventListener("click", () => {
+            inputVal.value = g2.innerText;
+            console.log(g2.innerText);
+        });
+        g3.addEventListener("click", () => {
+            inputVal.value = g3.innerText;
+            console.log(g3.innerText);
+        });
+        g4.addEventListener("click", () => {
+            inputVal.value = g4.innerText;
+            console.log(g4.innerText);
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
