@@ -1,0 +1,30 @@
+/* SearchFilter.css */
+.search-filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .search-filter-container input {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #f9f9f9; /* Light background color */
+  }
+  
+  .search-filter-container input::placeholder {
+    color: #aaa;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .search-filter-container input {
+      width: 150px;
+      padding: 6px;
+      font-size: 0.9rem;
+    }
+  }
+  

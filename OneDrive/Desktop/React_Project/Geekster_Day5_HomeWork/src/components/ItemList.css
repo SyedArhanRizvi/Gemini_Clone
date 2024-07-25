@@ -1,0 +1,37 @@
+.mainDiv{
+    width: 470px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 10px; */
+}
+.mainDiv .arr{
+    display: flex;
+    gap: 20px;
+}
+.mainDiv .arr .arrDiv{
+    display: flex;
+    flex-direction: column;
+    
+}
+.mainDiv .arr .arrDiv .a1{
+    cursor: pointer;
+}
+.mainDiv .arr .arrDiv .a1:hover{
+    color: green;
+}
+.mainDiv .arr .arrDiv .a2{
+    cursor: pointer;
+}
+.mainDiv .arr .arrDiv .a2:hover{
+    color: red;
+}
+.mainDiv .arr .h1{
+    font-size: 20px;
+    font-weight: lighter;
+}
+.mainDiv div .h2{
+    font-size: 20px;
+    font-weight: lighter;
+}

@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.body{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url(./assets/loneliness_by_ryky_dbxad0s-pre.jpg);
+  background-position: center;
+  background-size: cover;
+
+}
+.likeIncrease{
+  height: 200px;
+  width: 200px;
+  border: 2px solid red;
+  color: white;
+  font-size: 4em;
+}
+.likeDicrease{
+  height: 200px;
+  width: 200px;
+  border: 2px solid red;
+  color: white;
+  font-size: 4em;
+
+}

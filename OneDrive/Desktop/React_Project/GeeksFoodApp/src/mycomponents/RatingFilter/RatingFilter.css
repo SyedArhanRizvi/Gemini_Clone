@@ -1,0 +1,26 @@
+/* RatingFilter.css */
+.rating-filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .rating-filter-container input {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    text-align: center;
+    background-color: #f9f9f9; /* Light background color */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .rating-filter-container input {
+      width: 80px;
+      padding: 6px;
+      font-size: 0.9rem;
+    }
+  }

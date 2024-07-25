@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+.cartDiv{
+    /* height: 30vw; */
+    width: 550px;
+    border: 2px solid black;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.cartDiv .bodyCont{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
