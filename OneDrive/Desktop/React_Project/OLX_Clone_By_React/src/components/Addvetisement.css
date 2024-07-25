@@ -1,0 +1,68 @@
+.addTi{
+    width: 80em;
+    padding: 10px;
+    background: rgb(237, 236, 236);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+.addTi p{
+    margin-bottom: 20px;
+}
+.addTi .addBody{
+    width: 80%;
+    background: white;
+    padding: 10px;
+}
+.addTi .addBody .title{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+.addTi .addBody .title .cut:hover{
+    cursor: pointer;
+    color: red;
+}
+.addTi .addBody .cards {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+.addTi .addBody .cards .c1{
+    width: 24%;
+    
+}
+.addTi .addBody .cards .c1 .img img{
+    width: 100%;
+    height: 10em;
+}
+.addTi .addBody .cards .c1 .details{
+    width: 100%;
+    padding: 10px;
+    /* font-fami; */
+}
+.addTi .addBody .cards .c1 .cardBtns{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.addTi .addBody .cards .c1 .cardBtns div p:hover{
+    color: rgb(20, 83, 230);
+    cursor: pointer;
+}
+.addTi .addBody .cards .c1 .cardBtns .btn button{
+    background: red;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
+.addTi .addBody .cards .c1 .cardBtns .btn button:hover{
+    background: green;
+}

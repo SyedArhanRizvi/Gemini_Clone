@@ -1,0 +1,23 @@
+.div{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4em;
+    box-shadow: 2px 2px 9px 0px rgba(165,160,160,1);
+    -webkit-box-shadow: 2px 2px 9px 0px rgba(165,160,160,1);
+    -moz-box-shadow: 2px 2px 9px 0px rgba(165,160,160,1);
+/* margin-bottom: 20px; */
+}
+.div div {
+    display: flex;
+    gap: 20px;
+}
+.div div span{
+    font-weight: lighter;
+    cursor: pointer;
+}
+.div div span:hover{
+    color: rgb(39, 167, 167);
+    /* font-weight: bold; */
+}

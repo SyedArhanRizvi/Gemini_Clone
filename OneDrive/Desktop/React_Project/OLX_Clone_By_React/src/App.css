@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section{
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.s2{
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    /* background: red; */
+}
+.s2 .main1{
+    width: 82%;
+    background: rgb(237, 236, 236);
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.s2 .main2{
+    width: 90%;
+    /* background: rgb(237, 236, 236); */
+    padding: 10px;
+    /* background: red; */
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    gap: 10px;
+}
+.s2 .main2 .heading{
+    width: 100%;
+}
+.footer{
+    width: 100vw;
+} 
+.footer .footer1{
+    width: 100%;
+    display: flex;
+    background: rgb(237, 236, 236);
+}
+.footer .footer1 .olxImg{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.footer .footer1 .olxImg .img img{
+    height: 100%;
+    width: 30em;
+}
+.footer .footer1 .olxImg .heading1{
+    width: 30%;
+    height: 100%;
+    padding-top: 50px;
+    border-right-style:groove;
+}
+.footer .footer1 .olxImg .heading1 h1{
+    font-size: 2em;
+}
+.footer .footer1 .olxPlay{
+    padding: 20px;
+    padding-top: 50px;
+}
+.footer .footer1 .olxPlay .btns h3{
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.footer .footer1 .olxPlay .btns button{
+    padding: 8px 13px;
+    border-radius: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+footer .footer2{
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    background: white;
+    justify-content: space-around;
+}
+footer .footer2 .fdiv p{
+    color: grey;
+    cursor: pointer;
+}
+footer .footer2 .fdiv span{
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-right: 10px;
+}
+footer .footer3{
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    background: #002F34;
+    justify-content: space-around;
+    position: relative;
+}
+footer .footer3 .f3div{
+    height: 10em;
+    width: 10em;
+}
+footer .footer3 .f3div img{
+    height: 100%;
+    width: 100%;
+}
+footer .footer3 .f5div{
+    height: 12em;
+    width: 12em;
+    border-right-style: groove;
+}
+footer .footer3 .f5div img{
+    height: 100%;
+    width: 100%;
+}
+footer .footer3 .f4div{
+    height: 6em;
+    width: 6em;
+    margin-top: 35px;
+}
+footer .footer3 .f4div img{
+    height: 100%;
+    width: 100%;
+}
+footer .footer3 .copyRigt{
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    color: white;
+}

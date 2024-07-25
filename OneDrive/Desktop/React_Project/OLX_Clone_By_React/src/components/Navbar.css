@@ -1,0 +1,103 @@
+header {
+    width: 100vw;
+    background: rgb(237, 236, 236);
+}
+header nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+header nav div {
+    display: flex;
+    gap: 20px;
+}
+header nav div .location input{
+    height: 3.5em;
+    width: 19em;
+    padding-left: 10px;
+    font-weight: bold;
+}
+header nav div .logo img{
+    height: 4em;
+    width: 4em;
+}
+header nav div .search input{
+    height: 3.5em;
+    width: 50em;
+    padding-left: 10px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: 1px solid grey;
+    font-weight: bold;
+}
+header nav div .bg{
+    height: 2.9em;
+    width: 5em;
+    background: rgba(230, 227, 227, 0.737);
+    margin-left: -100px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+}
+header nav div .bg .voice{
+    /* height: 10em; */
+    /* width: 2em; */
+    /* background: aqua; */
+    /* margin-left: -100px; */
+    /* font-size: 1.2em; */
+    cursor: pointer;
+    padding-top: 10px;
+    font-size: x-large;
+}
+header nav div .bg .voice .i1{
+    font-size: 0.8em;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+header nav div .bg .glass{
+    /* height: 1em; */
+    /* width: 2em; */
+    /* background: aqua; */
+    /* margin-left: -100px; */
+    cursor: pointer;
+    padding-top: 10px;
+    font-size: x-large;
+}
+header nav div .bg .glass .i2{
+    font-size: 0.9em;
+    margin-left: -10px;
+    margin-top: 1px;
+}
+header nav div .lang select{
+    border: none;
+    cursor: pointer;
+    background: rgb(237, 236, 236);
+    /* width: 10e/; */
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.2em;
+}
+header nav div .msg{
+    cursor: pointer;
+    padding-top: 10px;
+    font-size: xx-large;
+}
+header nav div .notification{
+    cursor: pointer;
+    padding-top: 10px;
+    font-size: xx-large;
+}
+header nav div .account{
+    cursor: pointer;
+    padding-top: 10px;
+    font-size: xx-large;
+}
+header nav div .sell button{
+    height: 3em;
+    padding: 8px 30px;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}

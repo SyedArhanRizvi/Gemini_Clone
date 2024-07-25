@@ -1,0 +1,29 @@
+.card{
+    height: 17em;
+    width: 20em;
+    border: 1px solid rgb(184, 182, 182);
+    position: relative;
+    padding: 10px;
+    background: white;
+}
+.card .img img{
+    width: 100%;
+    margin-bottom: 10px;
+    height: 10em;
+}
+.card .heart {
+    position: absolute;
+    top: 15px;
+    cursor: pointer;
+    right: 15px;
+    color: white;
+    font-size: x-large;
+}
+.card .details p{
+    color: gray;
+}
+.card .timing{
+    position: absolute;
+    right: 30px;
+    color: gray;
+}
