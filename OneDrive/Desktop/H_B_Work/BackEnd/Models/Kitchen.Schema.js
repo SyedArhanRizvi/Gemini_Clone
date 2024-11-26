@@ -5,7 +5,7 @@ const ModularKitchenSchema = new mongoose.Schema({
   kitchenName: { type: String, required: true },
   kitchenDetails: { type: String, required: true },
   priceRange : {type:Number, required:true},
-  kitchenImages: [{ type: String, required: true }], // Array of image URLs
+  kitchenImages: [{ type: Array, required: true }], // Array of image URLs
   createdAt: { type: Date, default: Date.now }
 });
 

@@ -1,9 +1,11 @@
 import multer from 'multer';
 
-// Store uploaded files in memory (use memory storage for Cloudinary)
+// Store uploaded files in memory for further processing (e.g., uploading to Cloudinary)
 const storage = multer.memoryStorage();
- 
-// Multer middleware for handling multiple image uploads
-const upload = multer({ storage }).array('images', 12); // 'images' is the field name in the form
 
-export default upload;
+// Configure Multer to handle multiple fields
+export const upload = multer({ storage }).fields([
+  { name: 'url', maxCount: 12 }, // Up to 12 images
+  { name: 'video', maxCount: 4 }, // Single video file (optional)
+]);
+

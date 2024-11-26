@@ -14,7 +14,7 @@ cloudinary.config({
 export const uploadImageToCloudinary = (file, index) => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload_stream({
-      public_id: `user_image_${Date.now()}_${index + 1}`, // Custom public_id
+      public_id: `image${Date.now()}_${index + 1}`, // Custom public_id
       resource_type: 'auto', // Detect the resource type (image/video)
     }, (error, result) => {
       if (error) {

@@ -5,7 +5,7 @@ const FurnitureSchema = new mongoose.Schema({
   furnitureName: { type: String, required: true }, // Name of the furniture (e.g., Chair, Table)
   furnitureType: { type: String, required: true }, // Type (e.g., Wooden, Metal, etc.)
   furnitureDetails: { type: String, required: true }, // Detailed description
-  furnitureImages: [{ type: String, required: true }], // Array of image URLs
+  furnitureImages: [{ type: Array, required: true }], // Array of image URLs
   priceRange: { type: String, required: true }, // Price range or estimated cost
   createdAt: { type: Date, default: Date.now },
 });

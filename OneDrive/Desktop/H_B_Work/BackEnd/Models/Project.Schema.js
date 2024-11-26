@@ -13,14 +13,9 @@ const ProjectSchema = new mongoose.Schema({
     type: String, 
     required: true
    },
-  projectPhotos: {
-    type: [String],
-    validate: {
-      validator: (arr) => arr.length > 0,
-      message: "At least one client photo is required.",
-    },
-    required: true,
-  },
+  projectPhotos: [
+    {type:Array, required:true},
+  ],
   projectDetails: { 
     type: String, 
     required: true

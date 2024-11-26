@@ -5,7 +5,7 @@ const InteriorWorkSchema = new mongoose.Schema({
   clientReview : {type: String},
   interiorTitle: { type: String, required: true },
   interiorDetails: { type: String, required: true },
-  interiorImages: [{ type: String, required: true }], // Array of image URLs
+  interiorImages: [{ type: Array, required: true }], // Array of image URLs
   createdAt: { type: Date, default: Date.now }
 });
 

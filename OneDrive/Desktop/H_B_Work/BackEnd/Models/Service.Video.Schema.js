@@ -7,5 +7,5 @@ const ServiceVideoSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now } // Timestamp for the entry
 });
 
-export default mongoose.model('ServiceVideo', ServiceVideoSchema);
+export const VideoModel =  mongoose.model('ServiceVideo', ServiceVideoSchema);
 // title,videoUrl,description

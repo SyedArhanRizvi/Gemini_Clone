@@ -8,4 +8,4 @@ const SliderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now } // Timestamp for the entry
 });
 
-export default mongoose.model('Slider', SliderSchema);
+export const SlideModel = mongoose.model('Slider', SliderSchema);

@@ -1,9 +1,10 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { UserModel } from "../Models/user.Model.js";
+// import { DUser } from "../Models/user.Model.js";
+import { DUser } from "../Models/User.Schema.js";
 dotenv.config();
 const userAuthChecker = async (req, res, next)=>{ 
-    // console.log("We are in the user auth checker ", req);
+    console.log("We are in the user auth checker ", req);
     
     const {auth_token} = req.cookies;
     if(!auth_token) {
@@ -18,7 +19,7 @@ const userAuthChecker = async (req, res, next)=>{
             return res.status(404).json({message:"Sorry decoded_token not found ", decode_token});
         }
 
-        const userLoggedIn = await UserModel.findById(decode_token.userID);
+        const userLoggedIn = await DUser.findById(decode_token.userID);
         // console.log("This is user logged in info ", userLoggedIn);
         
         if(!userLoggedIn) {

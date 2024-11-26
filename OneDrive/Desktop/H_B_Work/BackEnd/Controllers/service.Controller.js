@@ -1,24 +1,37 @@
+import { TrustProductsEntityAssignmentsInstance } from "twilio/lib/rest/trusthub/v1/trustProducts/trustProductsEntityAssignments.js";
 import { DesignModel } from "../Models/Designs.Schema.js";
 import { FurnitureModel } from "../Models/Furniture.Schema.js";
 import { InteriorWorkModel } from "../Models/Interior.Schema.js";
 import { KitchenModel } from "../Models/Kitchen.Schema.js";
+import { MarqueModel } from "../Models/Marque.Schema.js";
 import  ProjectModel  from "../Models/Project.Schema.js";
+import { VideoModel } from "../Models/Service.Video.Schema.js";
+import { SlideModel } from "../Models/Slider.Schema.js";
 import { SofaWorkModel } from "../Models/Sofa.Schema.js";
 import { uploadImageToCloudinary } from "../Utils/cloudinary.db.js";
+import { singlePhotoUploadOnCloud } from "../Utils/signle.cloudinary.upload.js";
+import { LatestProjModel } from "../Models/Latest.Proj.js";
+import { HeroSecModel } from "../Models/HeroSec.Schema.js";
+import { HeroServiceModel } from "../Models/HeroService.js";
 
 
 // This Section is only for project routes related ::
 export const addingNewProjectController = async (req, res)=>{
     const {projectTitle, projectSiteName, projectAddress,projectDetails, clientReview, completionDuration} = req.body;
+    // console.log(req.body);
+    // console.log(projectTitle, projectSiteName, projectAddress,projectDetails, clientReview, completionDuration);
+    console.log("This is req.file ", req.file);
+    
+    
     try {
         if(!projectTitle || !projectSiteName || !projectAddress || !projectDetails || !completionDuration) {
             console.log(projectTitle, projectSiteName, projectAddress,projectDetails, clientReview, completionDuration);
             return res.status(400).json({message:"Invalid Credentials all fields are required"});
         }
-        const uploadPromises = req.files.map((file, index) => {
+        const uploadPromises = req.files.url.map((file, index) => {
             return uploadImageToCloudinary(file, index);
           });
-          const uploadResults = await Promise.all(uploadPromises);
+        const uploadResults = await Promise.all(uploadPromises);
         const projectUploaded = await ProjectModel.create({projectTitle, projectSiteName, projectAddress,projectDetails, clientReview, completionDuration, projectPhotos:uploadResults});
         return res.status(201).json({message:"New Project has successfully added", projectData:projectUploaded});
     } catch (error) {
@@ -64,11 +77,14 @@ export const addingNewSofaProjectController = async (req, res)=>{
             console.log(clientName,sofaName,sofaDetails);
             return res.status(400).json({message:"Invalid Credentials all fields are required"});
         }
-        const uploadPromises = req.files.map((file, index) => {
+       
+        
+        const uploadPromises = req.files.url.map((file, index) => {
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const uploadedSofa = await SofaWorkModel.create({clientName,sofaName,sofaDetails, sofaImages:uploadResults});
+        //   console.log("This is uploadResults.url" , uploadResults[0].url, "and this is uploadResults", uploadResults);
+          const uploadedSofa = await SofaWorkModel.create({clientName,sofaName,sofaDetails, sofaImages:uploadResults[0].url});
           return res.status(201).json({message:"New Sofa Project Uploaded", uploadedSofa});
     } catch (error) {
         console.log("There are some errors in your addingNewSofaProjectController plz fix the bug first ", error);
@@ -116,11 +132,11 @@ export const addingNewInteriorServiceController = async (req, res)=>{
             console.log(clientName, interiorTitle, interiorDetails, clientReview);
             return res.status(400).json({message:"Invalid Credentials all fields are required"});
         }
-        const uploadPromises = req.files.map((file, index) => {
+        const uploadPromises = req.files.url.map((file, index) => {
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const uploadedInteriorProject = await InteriorWorkModel.create({clientName, interiorTitle, interiorDetails, clientReview, interiorImages:uploadResults});
+          const uploadedInteriorProject = await InteriorWorkModel.create({clientName, interiorTitle, interiorDetails, clientReview, interiorImages:uploadResults[0].url});
           return res.status(201).json({message:"Congratulations your interior project has been successfully uploaded ", uploadedInteriorProject});
     } catch (error) {
        console.log("There are some errors in your addingNewInteriorServiceController plz fix the bug first ", error);
@@ -168,11 +184,11 @@ export const addingNewDesigningServicesController = async (req, res)=>{
             console.log(designName, designCategory, designDetails, designerName);
             return res.status(400).json({message:"Invalid Credentials all fields are required"});
         }
-        const uploadPromises = req.files.map((file, index) => {
+        const uploadPromises = req.files.url.map((file, index) => {
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const uploadedNewDesign = await DesignModel.create({designName, designCategory, designDetails, designerName, designImages:uploadResults});
+          const uploadedNewDesign = await DesignModel.create({designName, designCategory, designDetails, designerName, designImages:uploadResults[0].url});
           return res.status(201).json({uploadedNewDesign});
     } catch (error) {
         console.log("There are some errors in your addingNewDesigningServicesController plz fix the bug first ", error);
@@ -216,11 +232,11 @@ export const addingNewFurnitureServiceController = async (req, res)=>{
             console.log(clientName,furnitureName,furnitureType,furnitureDetails,furnitureImages,priceRange);
             return res.status(400).json({message:"Invalid Credentials all fields are required"});
         }
-        const uploadPromises = req.files.map((file, index) => {
+        const uploadPromises = req.files.url.map((file, index) => {
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const addedFurniture = await FurnitureModel.create({clientName,furnitureName,furnitureType,furnitureDetails,furnitureImages:uploadResults,priceRange});
+          const addedFurniture = await FurnitureModel.create({clientName,furnitureName,furnitureType,furnitureDetails,furnitureImages:uploadResults[0].url,priceRange});
           return res.status(201).json({addedFurniture});
     } catch (error) {
         console.log("There are some errors in your addingNewFurnitureServiceController plz fix the bug first ", error);
@@ -268,11 +284,11 @@ export const addingNewModuloKitchenServiceController = async (req, res)=>{
             console.log(clientName,kitchenName,kitchenDetails);
             return res.status(400).json({message:"Invalid Credentials all fields are required"});
         }
-        const uploadPromises = req.files.map((file, index) => {
+        const uploadPromises = req.files.url.map((file, index) => {
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const addedKitchenProject = await KitchenModel.create({clientName,kitchenName,kitchenDetails,kitchenImages:uploadResults, priceRange});
+          const addedKitchenProject = await KitchenModel.create({clientName,kitchenName,kitchenDetails,kitchenImages:uploadResults[0].url, priceRange});
           return res.status(201).json({addedKitchenProject});
     } catch (error) {
         console.log("There are some errors in your addingNewModuloKitchenServiceController plz fix the bug first ", error);
@@ -311,5 +327,311 @@ export const getAllModuloKitchenServiceController = async (req, res)=>{
     } catch (error) {
         console.log("There are some errors in your getAllModuloKitchenServiceController plz fix the bug first ", error);
         return res.status(500).json({message:"There are some errors in your getAllModuloKitchenServiceController plz fix the bug first ", error}); 
+    }
+}
+export const addingSliderObjController = async (req, res)=>{
+    const {challenge,result,clientName} = req.body;
+    const photo = req.file ? req.file.path : null;
+    try {
+        if(!challenge || !result || !clientName || !photo) {
+            console.log(challenge,result,clientName, photo);
+            return res.status(400).json({message:"Invalid Credentials All fields are required"});
+        }
+        const slideImg = await singlePhotoUploadOnCloud(photo);
+        if(!slideImg) {
+            console.log(photo);
+            return res.status(400).json({message:"Invalid Credentials slide photo is required"});
+        }
+        const slideUploaded = await SlideModel.create({challenge,result,clientName, url:slideImg});
+        return res.status(201).json({slideUploaded});
+    } catch (error) {
+        console.log("There are some errors in your addingSliderObjController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your addingSliderObjController plz fix the bug first ", error});
+    }
+}
+export const updateSliderPrevObj = async (req, res)=>{
+    const {challenge,result,clientName} = req.body;
+    const id = req.params.id;
+    try {
+        if(!challenge || !result || !clientName) {
+            console.log(challenge,result,clientName);
+            return res.status(400).json({message:"Invalid Credentials All Fields Are Required"});
+        }
+        const updatedSlider = await SlideModel.findByIdAndUpdate(id, {challenge,result,clientName});
+        return res.status(201).json({updatedSlider});
+    } catch (error) {
+        console.log("There are some errors in your updateSliderPrevObj plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your updateSliderPrevObj plz fix the bug first ", error});
+    }
+}
+export const deletePrevSliderObj = async (req, res)=>{
+    const id = req.params.id;
+    try {
+        const deletedSlider = await SlideModel.findByIdAndDelete(id);
+        return res.status(200).json({message:"Your Slider Has Been Successfully Deleted"});
+    } catch (error) {
+        console.log("There are some errors in your deletePrevSliderObj plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your deletePrevSliderObj plz fix the bug first ", error});
+    }
+}
+export const getAllSliderImg = async (req, res)=>{
+    try {
+        const allSlides = await SlideModel.find();
+        return res.status(200).json({allSlides});
+    } catch (error) {
+        console.log("There are some errors in your getAllSliderImg plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your getAllSliderImg plz fix the bug first ", error});
+    }
+}
+export const addingNewVideoController = async (req, res)=>{
+    const {title,videoUrl,description} = req.body;
+
+    try {
+        if(!title || !videoUrl || !description) {
+            return res.status(400).json({message:"Invalid credentials all fields are required"});
+        }
+    } catch (error) {
+        console.log("There are some errors in your addingNewVideoController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your addingNewVideoController plz fix the bug first ", error});
+    }
+}
+export const updatePrevVideoController = async (req, res) =>{
+    const {title,videoUrl,description} = req.body;
+    const id = req.params.id;
+    try {
+        if(!title || !videoUrl || !description) {
+            return res.status(400).json({message:"Invalid credentials all fields are required"});
+        }
+        const updatedVideoSection = await VideoModel.findByIdAndUpdate(id, {title,videoUrl,description});
+        return res.status(201).json({updatedVideoSection});
+    } catch (error) {
+        console.log("There are some errors in your updatePrevVideoController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your updatePrevVideoController plz fix the bug first ", error});
+    }
+}
+export const deletePrevVideoController = async (req, res)=>{
+    const id = req.params.id;
+    try {
+        const deletedVideoSection = await VideoModel.findByIdAndDelete(id);
+        return res.status(200).json({message:"Video Section Has Been Successfully deleted"});
+    } catch (error) {
+        console.log("There are some errors in your deletePrevVideoController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your deletePrevVideoController plz fix the bug first ", error});
+    }
+}
+export const getAllVideoController = async (req, res)=>{
+    try {
+        const videoSection = await VideoModel.find();
+        return res.status(200).json({videoSection});
+    } catch (error) {
+        console.log("There are some errors in your getAllVideoController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your getAllVideoController plz fix the bug first ", error});
+    }
+}
+export const addingNewMarqueSentencesController = async (req, res)=> {
+    const {sentence} = req.body;
+    try {
+        if(!sentence) {
+            console.log(sentence);
+            return res.status(400).json({message:"Invalid Credentials all fields are required"});
+        }
+        const uploadPromises = req.files.map((file, index) => {
+            return uploadImageToCloudinary(file, index);
+          });
+          const uploadResults = await Promise.all(uploadPromises);
+          if(!uploadResults) {
+            console.log(uploadResults);
+            return res.status(400).json({message:"Invalid Credentials all fields are required"});
+          }
+          const marqueData = await MarqueModel.create({sentence, images:uploadResults});
+          return res.status(201).json({marqueData});
+    } catch (error) {
+        console.log("There are some errors in your addingNewMarqueSentencesController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your addingNewMarqueSentencesController plz fix the bug first ", error});
+    }
+}
+export const updatingPrevMarqueSentencesController = async (req, res)=>{
+    const {sentence} = req.body;
+    const id = req.params.id;
+    try {
+        if(!sentence) {
+            console.log(sentence);
+            return res.status(400).json({message:"Invalid Credentials all fields are required"});
+        }
+        const updatedMarque = await MarqueModel.findByIdAndUpdate(id, {sentence});
+        return res.status(201).json({updatedMarque});
+    } catch (error) {
+        console.log("There are some errors in your updatingPrevMarqueSentencesController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your updatingPrevMarqueSentencesController plz fix the bug first ", error});
+    }
+}
+export const deletingPrevMarqueSentencesController = async (req ,res)=>{
+    const id = req.params.id;
+    try {
+        const deletedMarque = await MarqueModel.findByIdAndDelete(id);
+        return res.status(200).json({message:"Marque Deleted Successfully"});
+    } catch (error) {
+        console.log("There are some errors in your deletingPrevMarqueSentencesController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your deletingPrevMarqueSentencesController plz fix the bug first ", error});
+    }
+}
+export const getMarqueSentencesController = async (req, res)=>{
+    try {
+        const marqueDetails = await MarqueModel.find();
+        return res.status(200).json({marqueDetails});
+    } catch (error) {
+        console.log("There are some errors in your getMarqueSentencesController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your getMarqueSentencesController plz fix the bug first ", error});
+    }
+}
+export const addingNewLatestProjectController = async (req, res)=>{
+    const {projectTitle,projectDetails} = req.body;
+    try {
+        if(!projectTitle || !projectDetails) {
+            console.log(projectTitle, projectDetails);
+            return res.status(400).json({message:"Invalid Credentials all fields are required"});
+        }
+        console.log("This is files" , req.files.url);
+        
+        const uploadPromises = await req.files.url.map((file, index) => {
+            return uploadImageToCloudinary(file, index);
+          });
+          const uploadPromisesVideo = await req.files.video.map((file, index) => {
+            return uploadImageToCloudinary(file, index);
+          });
+          const uploadResults = await Promise.all(uploadPromises);
+          const uploadResultsVideo = await Promise.all(uploadPromisesVideo);
+          if(!uploadResults || !uploadResultsVideo) {
+            console.log(uploadResults, uploadResultsVideo);
+            return res.status(400).json({message:"Invalid Credentials all fields are required"});
+          }
+          const videoUrl = uploadResultsVideo.map((video, idx)=>{
+            return video.url
+          });
+          const imgUrl = uploadResults.map((img, idx)=>{
+            return img.url
+          });
+          console.log(videoUrl, imgUrl);
+          
+          const latestProjUploaded = await LatestProjModel.create({projectTitle,projectDetails, images:imgUrl, videoUrl:videoUrl});
+          return res.status(201).json({latestProjUploaded});
+    } catch (error) {
+        console.log("There are some errors in your addingNewLatestProjectController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your addingNewLatestProjectController plz fix the bug first ", error});
+    }
+}
+export const updatePrevLatestProjectController = async (req, res)=>{
+    const {projectTitle,projectDetails} = req.body;
+    const id = req.params.id;
+    try {
+        if(!projectTitle || !projectDetails) {
+            console.log(projectTitle, videoUrl, projectDetails);
+            return res.status(400).json({message:"Invalid Credentials all fields are required"});
+        }
+        const updatedLatestProj = await LatestProjModel.findByIdAndUpdate(id, {projectTitle,projectDetails});
+        return res.status(201).json({updatedLatestProj});
+    } catch (error) {
+        console.log("There are some errors in your updatePrevLatestProjectController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your updatePrevLatestProjectController plz fix the bug first ", error}); 
+    }
+}
+export const deletePrevLatestProjectController = async (req, res)=>{
+    const id = req.params.id;
+    try {
+        const deletingLatestProj = await LatestProjModel.findByIdAndDelete(id);
+        return res.status(200).json({message:"Project has been successfully deleted"});
+    } catch (error) {
+        console.log("There are some errors in your deletePrevLatestProjectController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your deletePrevLatestProjectController plz fix the bug first ", error}); 
+    }
+}
+export const getLatestProjectController = async (req, res)=>{
+    console.log("We are in the get latest project controller ");
+    
+    try {
+        const latestProject = await LatestProjModel.find();
+        console.log("This is latest project ", latestProject);
+        
+        return res.status(200).json({latestProject});
+    } catch (error) {
+        console.log("There are some errors in your deletePrevLatestProjectController plz fix the bug first ", error);
+        return res.status(500).json({message:"There are some errors in your deletePrevLatestProjectController plz fix the bug first ", error});  
+    }
+}
+// export const addingAboutUtController = async (req, res)=>{
+//     try {
+        
+//     } catch (error) {
+//         console.log("There are some errors in your addingAboutUtController plz fix the bug first ", error);
+//         return res.status(500).json({message:"There are some errors in your addingAboutUtController plz fix the bug first ", error}); 
+//     }
+// }
+
+export const addPostIntoHeroSection = async (req, res)=>{
+    const {title, description} = req.body;
+    console.log(title, description);
+    
+    const file = req.file ? req.file.path : null;
+    try {
+        if(!file) {
+            return res.status(400).json({message:"Images is required", img:file});
+        }
+        const image = await singlePhotoUploadOnCloud(file);
+        const uploadedData = await HeroSecModel.create({image, title, description:description});
+        return res.status(201).json({uploadedData});
+    } catch (error) {
+        console.log("There are some errors in your addPostIntoHeroSection ", error);
+        return res.status(500).json({message:"There are some errors in your addPostIntoHeroSection ", error});
+    }
+}
+export const getAllHeroSectionDataController = async (req, res)=>{
+    try {
+        const allHeroData = await HeroSecModel.find();
+        return res.status(200).json({allHeroData});
+    } catch (error) {
+        console.log("There are some errors in your getAllHeroSectionDataController ", error);
+        return res.status(500).json({message:"There are some errors in your getAllHeroSectionDataController ", error});
+    }
+}
+export const updateHeroSecDataController = async (req, res)=>{
+    const {title, description} = req.body;
+    const id = req.params.id;
+    try {
+        const updatedData = await HeroSecModel.findByIdAndUpdate(id, {title, description});
+        return res.status(201).json({updatedData});
+    } catch (error) {
+        console.log("There are some errors in your updateHeroSecDataController ", error);
+        return res.status(500).json({message:"There are some errors in your updateHeroSecDataController ", error});
+    }
+}
+export const deleteHeroSectionData = async (req, res)=>{
+    const id = req.params.id;
+    try {
+        const deletedPost = await HeroSecModel.findByIdAndDelete(id);
+        return res.status(201).json({message:"Post Deleted"});
+    } catch (error) {
+        console.log("There are some errors in your deleteHeroSectionData ", error);
+        return res.status(500).json({message:"There are some errors in your deleteHeroSectionData ", error});
+    }
+}
+export const addNewServiceForHeroSection = async (req, res)=>{
+    const {serviceName, serviceDetails} = req.body;
+    const file = req.file ? req.file.path : null;
+    try {
+        const imgUrl = await singlePhotoUploadOnCloud(file);
+        const uploadedService = await HeroServiceModel.create({serviceName, serviceDetails, serviceImage:imgUrl});
+        return res.status(201).json({uploadedService});
+    } catch (error) {
+        console.log("There are some errors in your addNewServiceForHeroSection ", error);
+        return res.status(500).json({message:"There are some errors in your addNewServiceForHeroSection ", error});
+    }
+}
+export const getAllHeroServicesController = async (req, res)=>{
+    try {
+        const allHeroServices = await HeroServiceModel.find();
+        return res.status(200).json({allHeroServices});
+    } catch (error) {
+        console.log("There are some errors in your getAllHeroServicesController ", error);
+        return res.status(500).json({message:"There are some errors in your getAllHeroServicesController ", error});
     }
 }

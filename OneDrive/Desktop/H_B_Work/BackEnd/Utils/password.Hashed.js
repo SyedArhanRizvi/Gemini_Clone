@@ -8,3 +8,4 @@ const bcryptHashedPassword = async (password)=>{
     console.log("There is some errors in your bcrypt hashed password controller plz fix the bug first ", error);
    } 
 }
+export default bcryptHashedPassword;
