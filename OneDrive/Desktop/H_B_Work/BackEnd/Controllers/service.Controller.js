@@ -78,13 +78,14 @@ export const addingNewSofaProjectController = async (req, res)=>{
             return res.status(400).json({message:"Invalid Credentials all fields are required"});
         }
        
+        console.log("This is req.file",req.files);
         
         const uploadPromises = req.files.url.map((file, index) => {
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-        //   console.log("This is uploadResults.url" , uploadResults[0].url, "and this is uploadResults", uploadResults);
-          const uploadedSofa = await SofaWorkModel.create({clientName,sofaName,sofaDetails, sofaImages:uploadResults[0].url});
+          console.log("this is uploadResults", uploadResults);
+          const uploadedSofa = await SofaWorkModel.create({clientName,sofaName,sofaDetails, sofaImages:uploadResults});
           return res.status(201).json({message:"New Sofa Project Uploaded", uploadedSofa});
     } catch (error) {
         console.log("There are some errors in your addingNewSofaProjectController plz fix the bug first ", error);
@@ -136,7 +137,7 @@ export const addingNewInteriorServiceController = async (req, res)=>{
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const uploadedInteriorProject = await InteriorWorkModel.create({clientName, interiorTitle, interiorDetails, clientReview, interiorImages:uploadResults[0].url});
+          const uploadedInteriorProject = await InteriorWorkModel.create({clientName, interiorTitle, interiorDetails, clientReview, interiorImages:uploadResults});
           return res.status(201).json({message:"Congratulations your interior project has been successfully uploaded ", uploadedInteriorProject});
     } catch (error) {
        console.log("There are some errors in your addingNewInteriorServiceController plz fix the bug first ", error);
@@ -188,7 +189,7 @@ export const addingNewDesigningServicesController = async (req, res)=>{
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const uploadedNewDesign = await DesignModel.create({designName, designCategory, designDetails, designerName, designImages:uploadResults[0].url});
+          const uploadedNewDesign = await DesignModel.create({designName, designCategory, designDetails, designerName, designImages:uploadResults});
           return res.status(201).json({uploadedNewDesign});
     } catch (error) {
         console.log("There are some errors in your addingNewDesigningServicesController plz fix the bug first ", error);
@@ -236,7 +237,7 @@ export const addingNewFurnitureServiceController = async (req, res)=>{
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const addedFurniture = await FurnitureModel.create({clientName,furnitureName,furnitureType,furnitureDetails,furnitureImages:uploadResults[0].url,priceRange});
+          const addedFurniture = await FurnitureModel.create({clientName,furnitureName,furnitureType,furnitureDetails,furnitureImages:uploadResults,priceRange});
           return res.status(201).json({addedFurniture});
     } catch (error) {
         console.log("There are some errors in your addingNewFurnitureServiceController plz fix the bug first ", error);
@@ -288,7 +289,7 @@ export const addingNewModuloKitchenServiceController = async (req, res)=>{
             return uploadImageToCloudinary(file, index);
           });
           const uploadResults = await Promise.all(uploadPromises);
-          const addedKitchenProject = await KitchenModel.create({clientName,kitchenName,kitchenDetails,kitchenImages:uploadResults[0].url, priceRange});
+          const addedKitchenProject = await KitchenModel.create({clientName,kitchenName,kitchenDetails,kitchenImages:uploadResults, priceRange});
           return res.status(201).json({addedKitchenProject});
     } catch (error) {
         console.log("There are some errors in your addingNewModuloKitchenServiceController plz fix the bug first ", error);
