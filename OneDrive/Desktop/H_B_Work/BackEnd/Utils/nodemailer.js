@@ -23,9 +23,9 @@ const sendClientQueryEmail = async (clientData) => {
             subject: `New Client Query from ${name}`,
             html: `
                 <h1>New Client Inquiry</h1>
-                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Name:</strong> ${name || "New Costumer"}</p>
                 <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Phone:</strong> ${phone || "NAN"}</p>
                 <p><strong>Description:</strong></p>
                 <p>${description}</p>
             `,

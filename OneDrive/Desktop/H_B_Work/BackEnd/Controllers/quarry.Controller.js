@@ -1,5 +1,5 @@
 import sendClientQueryEmail from "../Utils/nodemailer.js";
-import clientReplyResult from "../Utils/reply.nodemailer.js"
+import sendOwnerReplyEmail from "../Utils/reply.nodemailer.js";
 export const quarryViaMailSendingController = async (req, res)=>{
     const { name, email, phone, description } = req.body;
     try {
@@ -17,5 +17,19 @@ export const quarryViaMailSendingController = async (req, res)=>{
     } catch (error) {
         console.log("There are some errors in your quarry send via mail controller plz fix the bug first ", error);
        return res.status(500).json({message:"There are some errors in your quarry send via mail controller plz fix the bug first ", error});
+    }
+}
+export const sendQuarryViaFooterMail = async (req, res)=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+export const setMeetingSchedule = async (req, res)=>{
+    try {
+        
+    } catch (error) {
+        
     }
 }

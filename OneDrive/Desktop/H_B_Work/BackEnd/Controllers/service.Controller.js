@@ -40,7 +40,9 @@ export const addingNewProjectController = async (req, res)=>{
     }
 }
 export const projectDetailsUpdatingController = async (req, res)=>{
-    const {projectTitle, projectSiteName, projectAddress,projectDetails, clientReview, completionDuration} = req.body;
+    const {projectTitle, projectSiteName, projectAddress,projectDetails, clientReview, completionDuration} = req.body.formData;
+    console.log(projectTitle, projectSiteName, projectAddress,projectDetails, clientReview, completionDuration);
+    
     const projectId = req.params.id;
     try {
         const updatedProject = await ProjectModel.findByIdAndUpdate(projectId, {projectTitle, projectSiteName, projectAddress,projectDetails, clientReview, completionDuration});
@@ -93,8 +95,10 @@ export const addingNewSofaProjectController = async (req, res)=>{
     }
 }
 export const updateSofaProjectDetails = async (req, res)=>{
-    const {clientName,sofaName,sofaDetails} = req.body;
+    const {clientName,sofaName,sofaDetails} = req.body.formData;
     const sofaId = req.params.id;
+    console.log("This is req.body.formData", req.body.formData);
+    console.log("This is clientName,sofaName,sofaDetails",  clientName,sofaName,sofaDetails);
     try {
         if(!clientName || !sofaName || !sofaDetails) {
             console.log(clientName,sofaName,sofaDetails);
@@ -145,7 +149,7 @@ export const addingNewInteriorServiceController = async (req, res)=>{
     }
 }
 export const updatePrevInteriorServiceController = async (req, res)=>{
-    const {clientName, interiorTitle, interiorDetails, clientReview} = req.body;
+    const {clientName, interiorTitle, interiorDetails, clientReview} = req.body.formData;
     const projectID = req.params.id;
     try {
         if(!interiorTitle || !interiorDetails) {
@@ -197,7 +201,7 @@ export const addingNewDesigningServicesController = async (req, res)=>{
     }
 }
 export const updatingPrevDesigningServices = async (req, res)=>{
-    const {designName, designCategory, designDetails, designerName} = req.body;
+    const {designName, designCategory, designDetails, designerName} = req.body.formData;
     const designID = req.params.id;
     try {
         const updatedDesignDetails = await DesignModel.findByIdAndUpdate(designID, {designName, designCategory, designDetails, designerName});
@@ -245,7 +249,7 @@ export const addingNewFurnitureServiceController = async (req, res)=>{
     }
 }
 export const UpdatePrevFurnitureServiceController = async (req, res)=>{
-    const {clientName,furnitureName,furnitureType,furnitureDetails,priceRange} = req.body;
+    const {clientName,furnitureName,furnitureType,furnitureDetails,priceRange} = req.body.formData;
     const id = req.params.id;
     try {
         if(!furnitureName || !furnitureType || !furnitureDetails || !priceRange) {
@@ -298,7 +302,7 @@ export const addingNewModuloKitchenServiceController = async (req, res)=>{
 }
 export const updatingPrevModuloKitchenServiceController = async (req, res)=>{
     const id = req.params.id;
-    const {clientName,kitchenName,kitchenDetails, priceRange} = req.body;
+    const {clientName,kitchenName,kitchenDetails, priceRange} = req.body.formData;
     try {
         if(!kitchenName || !kitchenDetails || !priceRange) {
             console.log(clientName,kitchenName,kitchenDetails,priceRange);
