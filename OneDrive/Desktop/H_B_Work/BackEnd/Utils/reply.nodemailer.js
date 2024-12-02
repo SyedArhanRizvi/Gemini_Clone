@@ -31,15 +31,15 @@ const sendOwnerReplyEmail = async (userEmail, clientName) => {
                 </ul>
                 
                 <h2>Contact Us:</h2>
-                <p><strong>Owner:</strong> Jane Doe</p>
-                <p><strong>Email:</strong> interiordecor@example.com</p>
-                <p><strong>Phone:</strong> +1 123-456-7890</p>
-                <p><strong>Office Address:</strong> 123 Decor Lane, Design City, USA</p>
+                <p><strong>Owner:</strong> Syed Haider Ali</p>
+                <p><strong>Email:</strong>Sophisticatedecor6@gmail.com</p>
+                <p><strong>Phone:</strong> +91-8791551332, +91-9871364655</p>
+                <p><strong>Office Address:</strong> Street G1, Near Jasola Metro, Jasola Vihar, New Delhi</p>
                 
                 <p>Feel free to reply to this email or call us if you have more questions. We look forward to working with you!</p>
                 
                 <p>Best Regards,</p>
-                <p><strong>Interior Decor Solutions</strong></p>
+                <p><strong>Sephesticate Decor</strong></p>
             `,
         };
 

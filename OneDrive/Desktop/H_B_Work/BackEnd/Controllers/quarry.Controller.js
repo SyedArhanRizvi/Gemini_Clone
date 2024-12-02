@@ -2,6 +2,8 @@ import sendClientQueryEmail from "../Utils/nodemailer.js";
 import sendOwnerReplyEmail from "../Utils/reply.nodemailer.js";
 export const quarryViaMailSendingController = async (req, res)=>{
     const { name, email, phone, description } = req.body;
+    console.log( name, email, phone, description);
+    
     try {
         if (!name || !email || !phone || !description) {
             return res.status(400).json({ success: false, message: 'All fields are required.' });

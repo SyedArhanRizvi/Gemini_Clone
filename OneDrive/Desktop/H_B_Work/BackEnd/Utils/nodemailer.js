@@ -19,7 +19,7 @@ const sendClientQueryEmail = async (clientData) => {
         // Email options
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to:'yourinteriorbusiness@example.com', // Your email to receive queries
+            to:'Sophisticatedecor6@gmail.com', // Your email to receive queries
             subject: `New Client Query from ${name}`,
             html: `
                 <h1>New Client Inquiry</h1>
